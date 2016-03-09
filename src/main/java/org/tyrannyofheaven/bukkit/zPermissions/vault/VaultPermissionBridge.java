@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.logging.Level;
 
 import net.milkbowl.vault.permission.Permission;
-import net.milkbowl.vault.permission.plugins.Permission_zPermissions;
+//import net.milkbowl.vault.permission.plugins.Permission_zPermissions;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -323,19 +323,19 @@ public class VaultPermissionBridge extends Permission implements Listener {
 
     public void register() {
         Bukkit.getServicesManager().register(Permission.class, this, plugin, ServicePriority.Highest);
-        // To be removed once/if Vault 1.2.26 is released
-        // In case Vault started before (though not really necessary if Bukkit's provider insert is stable)
-        for (RegisteredServiceProvider<?> provider : Bukkit.getServicesManager().getRegistrations(Permission.class)) {
-            removeIfDefaultVaultHandler(provider);
-        }
-        Bukkit.getPluginManager().registerEvents(this, plugin);
+//        // To be removed once/if Vault 1.2.26 is released
+//        // In case Vault started before (though not really necessary if Bukkit's provider insert is stable)
+//        for (RegisteredServiceProvider<?> provider : Bukkit.getServicesManager().getRegistrations(Permission.class)) {
+//            removeIfDefaultVaultHandler(provider);
+//        }
+//        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     // To be removed once/if Vault 1.2.26 is released
-    @EventHandler
-    public void vault_1_2_25_workaround(ServiceRegisterEvent event) {
-        removeIfDefaultVaultHandler(event.getProvider());
-    }
+//    @EventHandler
+//    public void vault_1_2_25_workaround(ServiceRegisterEvent event) {
+//        removeIfDefaultVaultHandler(event.getProvider());
+//    }
 
     private PermissionDao getDao() {
         return storageStrategy.getDao();
@@ -346,17 +346,17 @@ public class VaultPermissionBridge extends Permission implements Listener {
     }
 
     // To be removed once/if Vault 1.2.26 is released
-    private void removeIfDefaultVaultHandler(RegisteredServiceProvider<?> provider) {
-        // This is necessary because I set the original handler in Vault to ServicePriority.Highest,
-        // meaning I can't override it from zPermissions. This was fixed in post-1.2.25 Vault.
-        if (Permission.class.equals(provider.getService()) &&
-                "Vault".equals(provider.getPlugin().getName()) &&
-                Permission_zPermissions.class.isAssignableFrom(provider.getProvider().getClass()) &&
-                provider.getPriority() == ServicePriority.Highest) {
-            debug(plugin, "There can be only one! Removing Vault's Permission handler for zPermissions");
-            Bukkit.getServicesManager().unregister(Permission.class, provider.getProvider());
-        }
-    }
+//    private void removeIfDefaultVaultHandler(RegisteredServiceProvider<?> provider) {
+//        // This is necessary because I set the original handler in Vault to ServicePriority.Highest,
+//        // meaning I can't override it from zPermissions. This was fixed in post-1.2.25 Vault.
+//        if (Permission.class.equals(provider.getService()) &&
+//                "Vault".equals(provider.getPlugin().getName()) &&
+//                Permission_zPermissions.class.isAssignableFrom(provider.getProvider().getClass()) &&
+//                provider.getPriority() == ServicePriority.Highest) {
+//            debug(plugin, "There can be only one! Removing Vault's Permission handler for zPermissions");
+//            Bukkit.getServicesManager().unregister(Permission.class, provider.getProvider());
+//        }
+//    }
 
     private void complainInvalidArguments() {
         if (plugin.getLogger().isLoggable(Level.CONFIG)) {

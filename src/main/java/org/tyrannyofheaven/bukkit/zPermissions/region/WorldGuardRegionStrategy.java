@@ -32,10 +32,10 @@ import org.tyrannyofheaven.bukkit.util.ToHLoggingUtils;
 import org.tyrannyofheaven.bukkit.zPermissions.ZPermissionsCore;
 
 import com.google.common.collect.Iterables;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.managers.RegionManager;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+//import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+//import com.sk89q.worldguard.protection.ApplicableRegionSet;
+//import com.sk89q.worldguard.protection.managers.RegionManager;
+//import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 /**
  * RegionStrategy implementation for WorldGuard.
@@ -50,7 +50,7 @@ public class WorldGuardRegionStrategy implements RegionStrategy, Listener {
 
     private final ZPermissionsCore core;
 
-    private WorldGuardPlugin worldGuardPlugin;
+//    private WorldGuardPlugin worldGuardPlugin;
 
     public WorldGuardRegionStrategy(Plugin plugin, ZPermissionsCore core) {
         this.plugin = plugin;
@@ -78,34 +78,34 @@ public class WorldGuardRegionStrategy implements RegionStrategy, Listener {
 
     @Override
     public boolean isEnabled() {
-        return worldGuardPlugin != null;
+        return false;//worldGuardPlugin != null;
     }
 
     @Override
     public void shutdown() {
-        worldGuardPlugin = null;
+//        worldGuardPlugin = null;
     }
 
     @Override
     public Set<String> getRegions(Location location, Player player) {
-        if (isEnabled()) {
-            RegionManager rm = worldGuardPlugin.getRegionManager(location.getWorld());
-            if (rm != null) {
-                ApplicableRegionSet ars = rm.getApplicableRegions(location);
-                // Note, sorted from high to low priority, i.e. reverse application order
-                List<ProtectedRegion> sorted = new ArrayList<ProtectedRegion>();
-                Iterables.addAll(sorted, ars);
-                Collections.reverse(sorted); // Now it is in application order
-
-                Set<String> result = new LinkedHashSet<String>(); // Preserve ordering for resolver
-                for (ProtectedRegion pr : sorted) {
-                    // Ignore global region
-                    if (!"__global__".equals(pr.getId())) // NB: Hardcoded and not available as constant in WorldGuard
-                        result.add(pr.getId().toLowerCase());
-                }
-                return result;
-            }
-        }
+//        if (isEnabled()) {
+//            RegionManager rm = worldGuardPlugin.getRegionManager(location.getWorld());
+//            if (rm != null) {
+//                ApplicableRegionSet ars = rm.getApplicableRegions(location);
+//                // Note, sorted from high to low priority, i.e. reverse application order
+//                List<ProtectedRegion> sorted = new ArrayList<ProtectedRegion>();
+//                Iterables.addAll(sorted, ars);
+//                Collections.reverse(sorted); // Now it is in application order
+//
+//                Set<String> result = new LinkedHashSet<String>(); // Preserve ordering for resolver
+//                for (ProtectedRegion pr : sorted) {
+//                    // Ignore global region
+//                    if (!"__global__".equals(pr.getId())) // NB: Hardcoded and not available as constant in WorldGuard
+//                        result.add(pr.getId().toLowerCase());
+//                }
+//                return result;
+//            }
+//        }
         return Collections.emptySet();
     }
 
@@ -122,12 +122,12 @@ public class WorldGuardRegionStrategy implements RegionStrategy, Listener {
 
     private void detectWorldGuardPlugin() {
         Plugin plugin = Bukkit.getPluginManager().getPlugin(RM_PLUGIN_NAME);
-        if (plugin instanceof WorldGuardPlugin && plugin.isEnabled()) {
-            worldGuardPlugin = (WorldGuardPlugin)plugin;
-        }
-        else {
-            worldGuardPlugin = null;
-        }
+//        if (plugin instanceof WorldGuardPlugin && plugin.isEnabled()) {
+//            worldGuardPlugin = (WorldGuardPlugin)plugin;
+//        }
+//        else {
+//            worldGuardPlugin = null;
+//        }
     }
 
 }

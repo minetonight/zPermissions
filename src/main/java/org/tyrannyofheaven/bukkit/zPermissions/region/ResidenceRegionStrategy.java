@@ -28,8 +28,8 @@ import org.bukkit.plugin.Plugin;
 import org.tyrannyofheaven.bukkit.util.ToHLoggingUtils;
 import org.tyrannyofheaven.bukkit.zPermissions.ZPermissionsCore;
 
-import com.bekvon.bukkit.residence.Residence;
-import com.bekvon.bukkit.residence.protection.ClaimedResidence;
+//import com.bekvon.bukkit.residence.Residence;
+//import com.bekvon.bukkit.residence.protection.ClaimedResidence;
 
 /**
  * RegionStrategy implementation for Residence.
@@ -82,10 +82,10 @@ public class ResidenceRegionStrategy implements RegionStrategy, Listener {
 
     @Override
     public Set<String> getRegions(Location location, Player player) {
-        ClaimedResidence res = Residence.getResidenceManager().getByLoc(location);
-        if (res != null) {
-            return Collections.singleton(res.getName().toLowerCase());
-        }
+//        ClaimedResidence res = Residence.getResidenceManager().getByLoc(location);
+//        if (res != null) {
+//            return Collections.singleton(res.getName().toLowerCase());
+//        }
         return Collections.emptySet();
     }
 

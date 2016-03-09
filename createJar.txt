@@ -1,0 +1,1 @@
+move src/resources to / after jar export 

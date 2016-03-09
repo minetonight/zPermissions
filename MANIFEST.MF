@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Built-By: Scorpion_vn
+Build-Jdk: 1.7.0_51
+Implementation-Title: zPermissions
+Implementation-Version: 1.2_mc1.9
+Implementation-Vendor-Id: org.tyrannyofheaven.bukkit
+Implementation-Build: 636cc917e9ab
